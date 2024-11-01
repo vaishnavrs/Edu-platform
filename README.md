@@ -22,7 +22,7 @@ To install Enlightify, follow these steps:
 7. `python manage.py runserver`
 
 ## Usage
-1. Open a web browser and navigate to `http://127.0.0.1:
+1. Open a web browser and navigate to `http://127.0.0.1:8000/`:
 2. Register as a teacher or student.
 3. Browse and enroll in courses.
 4. Access course materials and assignments.
