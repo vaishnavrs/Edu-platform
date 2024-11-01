@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+        <div class="container-fluid" style="margin-top: 15%;">
+          <div class="row">
+                <nav class="navbar navbar-expand-lg sec-navbar" style="margin-left: 270px;">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                          <li class="nav-item {% if selected_category == 'Development' %}active{% endif %}">
+                              <a class="nav-link" href="?category=Development">Development</a>
+                          </li>
+                          <li class="nav-item {% if selected_category == 'Photography' %}active{% endif %}">
+                              <a class="nav-link" href="?category=Photography">Photography and Video</a>
+                          </li>
+                          <li class="nav-item {% if selected_category == 'Business' %}active{% endif %}">
+                              <a class="nav-link" href="?category=Business">Business</a>
+                          </li>
+                          <li class="nav-item {% if selected_category == 'IT & Software' %}active{% endif %}">
+                              <a class="nav-link" href="?category=IT & Software">IT & Software</a>
+                          </li>
+                          <li class="nav-item {% if selected_category == 'Health and Fitness' %}active{% endif %}">
+                              <a class="nav-link" href="?category=Health and Fitness">Health and Fitness</a>
+                          </li>
+                          <li class="nav-item {% if selected_category == 'Finance and Accounting' %}active{% endif %}">
+                              <a class="nav-link" href="?category=Finance and Accounting">Finance & Accounting</a>
+                          </li>
+                      </ul>
+                  </div>
+                  <hr>
+                </nav>
+          </div>
+      </div>
+      
+        <div class="container-fluid">
+            {% for category,course in courses.items %}
+                <div class="row" style="margin-top: 5%;">
+                    {% for c in course %}
+                        <a href="{% url 'course_detail' c.id %}" style="text-decoration: none; color: inherit;">
+                            <div class="card" id="course-card" style="width: 15rem;">
+                                <img class="card-img-top" id="card-img" src="{{ c.course_image.url }}" alt="Card image cap">
+                                <div class="card-body">
+                                <p class="card-text">
+                                    <b>{{c.course_name }}</b>
+                                </p>
+                                <p class="card-text">{{ c.faculty.name }}</p>
+                                <p class="card-text">
+                                    &#x20b9;{{ c.course_fee }}
+                                </p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

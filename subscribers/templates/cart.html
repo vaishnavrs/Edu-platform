@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row" style="margin-left: 130px; margin-top: 50px;">
+      <div class="col-md-8">
+        <h2 style="color: #2d2f31; margin-bottom: 35px;">Shopping Cart</h2>
+        {% if cart %}
+          {% for c in cart %}
+            <div class="card" id="cart-card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <img src="{{ c.course.course_image.url }}" height="70px" width="110px" alt="course-image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                      <h5 class="card-title">{{ c.course.course_name }}</h5>
+                      <p class="card-text"> By {{ c.course.faculty.name }}.</p>
+                    </div>
+                    <div class="col-md-2">
+                      <ul style="list-style-type: none;">
+                        <li class="nav-item">
+                          <a class="nav-link" href="">Remove</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-2">
+                      <p class="card-text" style="padding-top: 10px;"><strong>₹ {{ c.course.course_fee }}</strong></p>
+                    </div>
+                  </div> 
+                </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        <div class="cart-total" style="margin-left: 20px;">
+            <div>
+              <p style="padding-top: 60px;color:rgb(148, 145, 145); font-size:large;"><strong>Total :</strong></p>
+              <h5><strong>₹ {{ total }} </strong></h5>
+              <form action="{% url 'create_payment' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="student_id" value="{{ request.user.id }}">
+                    {% for c in cart %}
+                      <input type="hidden" name="cart_items[]" value="{{ c.course.id }}">
+                    {% endfor %}
+                <button class="btn btn-dark" id="check-out-btn">Check Out</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<footer class="footer bg-body-tertiary">
+    <div class="row footer-rw">
+      <hr>
+        <div class="col-md-3" style="padding-left: 30px; padding-bottom: 50px;">
+          <ul class="fot">
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Teach On Englightify</a></li>
+            <li><a href="#">Get The App</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li> 
+          </ul>
+        </div>
+        <div class="col-md-3" style="padding-bottom: 50px;">
+          <ul class="fot">
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help and Support</a></li>
+            <li><a href="#">Affiliate</a></li>
+            <li><a href="#">Investors</a></li>
+          </ul> 
+        </div>
+        <div class="col-md-3" style="padding-bottom: 50px;">
+          <ul class="fot">
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Sitemap</a></li>
+            <li><a href="">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <img class="footer-imge" src="{% static 'img/logo-transparent-png.png' %}" width="100px" height="100px" alt="">
+        </div>
+    </div>   
+</footer>
+{% endblock%}

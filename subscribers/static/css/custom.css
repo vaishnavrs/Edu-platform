@@ -1,0 +1,97 @@
+/* login page */
+#logimg {
+    max-width: 100%;
+    height: auto;
+}
+#logo-login{
+    position: relative;
+    margin-left: 95px;
+}
+
+#login-form {
+    border-radius: 8px;
+}
+
+#login-form input[name='username'],
+#login-form input[name='password'] {
+    padding: 5px 0;  
+    padding-left: 35px;
+    border-radius: 0%;
+    width: 300px;
+    border: none;  
+    border-bottom: 1px solid #222222;         
+    outline: none;
+    transition: border-bottom 0.3s ease;
+    background-color: transparent;
+    z-index: 2;
+
+}
+
+
+#login-form input[name='username']:focus,
+#login-form input[name='password']:focus {
+    border-bottom: 1px solid #000000; 
+    outline: none;                   
+    box-shadow: none;              
+
+}
+#login-btn,#reg-btn{
+    color: white;
+    width: 300px;
+    background: rgb(7,155,167);
+    background: linear-gradient(90deg, rgba(7,155,167,1) 13%, rgba(86,121,213,1) 48%, rgba(7,155,167,1) 88%);
+}
+.form-group {
+    position: relative;
+}
+.input-icon {
+    position: absolute;
+    padding-bottom: 5px;
+    left: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#login-form input[name='username']::placeholder,
+#login-form input[name='password']::placeholder {
+    padding-bottom: 5px;
+    padding-left: 40px;
+}
+
+.log-sign{
+    padding-top: 10px;
+    padding-left: 22%;
+}
+
+/* subscriber signup */
+.reg-form{
+    margin-left: 15%;
+    
+}
+.reg-form input{
+    padding: 5px 0;  
+    padding-left: 35px;
+    border-radius: 0%;
+    width: 300px;
+    border: none;  
+    border-bottom: 1px solid #222222;         
+    outline: none;
+    transition: border-bottom 0.3s ease;
+    background-color: transparent;
+    z-index: 2;
+}
+.reg-form input::placeholder{
+    padding-bottom: 5px;
+    padding-left: 40px;
+
+}
+
+#logo-reg{
+    margin-left: 105px;
+}
+#reg-login{
+    padding-top: 10px;
+    padding-left: 27%;
+
+}
+
+

@@ -1,0 +1,183 @@
+/* navbar */
+#search-form{
+    position:relative;
+    left: 45%;
+    width: 600px;
+    border-radius: 20px;
+  }
+  .navitems{
+    position: relative;
+    left: 10%;
+
+
+   
+  }
+  .navitems .nav-link {
+    color:#000000 !important;
+}
+
+.hom-nav {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* index */
+.index-head{
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 100px;
+}
+
+
+.sec-navbar .nav-link {
+  font-size: 18px;
+  margin-right: 20px;
+  position: relative; 
+  color: #b6b1b1; 
+
+}
+
+.sec-navbar .nav-link::before {
+  content: ''; 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px; 
+  background-color: #cccccc;
+  color: #cccccc; 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease; 
+}
+
+.sec-navbar .nav-link:hover::before {
+  transform: scaleX(1); 
+}
+
+.sec-navbar .nav-link:hover {
+  text-decoration: none;
+  padding-top: 5px; 
+  color: #000000 !important;
+}
+.sec-navbar .nav-item.active .nav-link {
+  color: #000000 !important; 
+ 
+}
+
+
+.cat-head {
+  position: relative;
+  padding-left: 80px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#course-card {
+  margin-left: 80px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  height: 330px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#card-img {
+  padding: 10px;
+  height: 180px;
+  object-fit: cover; 
+}
+
+#course-card:hover {
+  transform: scale(1.1);
+}
+
+/* course -detail */
+#detail-card{
+  position: relative;
+  border-radius:1px #000000;
+  margin-top: 40px;
+  margin-left: 200px;
+  height: 400px;
+}
+
+
+#detail-card-btn{
+  border-radius: 0px;
+  font-size: 15px;
+  padding:  10px;
+}
+
+#detail-cat{
+  margin-left: 230px;
+  padding-top: 30px;
+  font-size: large;
+}
+
+#detail-head,#detail-para{
+  margin-left: 230px;
+  padding-top: 30px;
+}
+
+
+#detail-para1{
+  margin-left: 200px;
+  padding-top: 18px;
+}
+
+.update-icon {
+  padding-right: 10px;
+  margin-top:10px;
+}
+
+
+.desc-card{
+  position: relative;
+  height: fit-content;
+  margin-top: 20px;
+  margin-left: 10%;
+  width: 60%;
+
+}
+
+#content-card{
+  margin-left: 195px;
+  width: 58%;
+
+}
+
+#content-head{
+  margin-bottom: 40px;
+  margin-left: 195px;
+
+}
+/* cart view */
+.footer-rw{
+  margin-top: 460px;
+  background-color: #2d2f31;
+  padding-top: 40px;
+ }
+ .fot > li {
+  padding-top: 8px;
+  list-style: none;
+}
+
+.fot > li > a {
+  color: #fff !important;
+}
+
+ .footer-imge{
+  position: relative;
+  top: 48%;
+ }
+ #cart-card{
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  margin-bottom: 30px;
+ }
+
+
+#check-out-btn{
+  border-radius: 0%;
+  margin-top: 20px;
+  padding: 10px;
+  width: 60%;
+}

@@ -1,0 +1,212 @@
+{% load static %}
+{% include 'sidebar.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light hom-nav" style="margin-top: 10px;">
+        <ul class=" navbar-nav ml-auto">
+          <li class="nav-item std-log">
+            <a href="">Student</a>
+          </li>
+          <li class="fac-name" style="padding-left: 6px;">{{ name }}</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <h4 style="padding-bottom: 20px;">{{ course.course_name }}</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Description</h5>
+            <p class="description">{{ course.course_desc }}</p>
+            <button type="submit" class="btn btn-outline-dark edit" data-toggle="modal" data-target="#descmodal">Edit</button>
+          </div>
+          <div class="col-md-6">
+            <h5>Course Syllabus</h5>
+            <p class="syllabus">{{ course.syllabus }}<p>
+              <button type="submit" class="btn btn-outline-dark edit" data-toggle="modal" data-target="#syllabusmodal">Edit</button>
+          </div>
+        </div>
+      </div>
+
+      <!--Description Modal -->
+      <div class="modal fade" id="descmodal" tabindex="-1" role="dialog" aria-labelledby="descmodal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLongTitle">Description</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'update_desc' course.id %}" method="post">
+                {% csrf_token %}
+                {{ form.course_desc }}
+                <button type="submit" class="btn btn-outline-dark">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Syllabus Modal -->
+      <div class="modal fade" id="syllabusmodal" tabindex="-1" role="dialog" aria-labelledby="syllabusmodal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLongTitle">Syllabus</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'update_syllabus' course.id %}" method="post">
+                {% csrf_token %}
+                {{ syllabus.syllabus }}
+                <button type="submit" class="btn btn-outline-dark">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+
+      <div class="container" >
+        <h4>Curriculum</h4>
+        <div class="row" style="margin-bottom: 15%;"> 
+            <button type="button" class="btn btn-outline-dark" id="mod-btn" data-toggle="modal" data-target="#moduleaddmodal">
+                Add Section <i class="fa-solid fa-plus" style="color: #171717;"></i>
+            </button>
+        </div>
+      </div>
+
+  
+
+    <div class="container" style="margin-bottom: 5%;">
+          <div class="accordion" id="moduleAccordion">
+            {% for mod in c_module %}
+              <div class="card">
+                <div class="card-header" id="heading{{ forloop.counter }}">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" id="add-course-head" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                      {{ mod.module_name }}
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#moduleAccordion">
+                  <div class="card-body" style="background-color: white;">
+                    {% if video_data %}
+                      {% for video in video_data %}
+                          {% if video.course_module.id == mod.id %}
+                          <a href="#" data-toggle="modal" data-target="#videoviewmodal{{ video.id }}" data-video-url="{{ video.video.url }}">
+                            <p class="video-title">
+                              <i class="fa-solid fa-tv fa-2xs" style="color: #000000; padding-right: 10px;"></i>{{ video.title }}
+                            </p>
+                          </a>
+                         <!--Lecture preview modal  -->
+                          <div class="modal fade" id="videoviewmodal{{ video.id }}" tabindex="-1" role="dialog" aria-labelledby="videoviewmodalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h3 class="modal-title" id="exampleModalLongTitle">Preview</h3>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body" style="padding-top: 30px;">
+                                  <video id="video" width="100%" height="100%" controls>
+                                    <source src="{{ video.video.url }}" type="video/mp4">
+                                  </video>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    <h6 style="padding-top: 20px;">Add More Lecture</h6>
+                        <form action="{% url 'video' course.id %}" method="post" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <div class="video-form">
+                              {{ video_form.title }}
+                          </div>
+                          <div class="video-form">
+                            {{ video_form.video }}
+                          </div>
+                          <input type="hidden" name="course_module" value="{{ mod.id }}">
+                          <button type="submit" class="btn btn-outline-dark upload">upload</button>
+                        </form>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+    </div>
+
+
+
+
+    <!-- Section modal -->
+    <div class="modal fade" id="moduleaddmodal" tabindex="-1" role="dialog" aria-labelledby="moduleaddmodal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLongTitle">Add Module</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding-top: 30px;">
+            <form action="{% url 'create_form' course.id %}" method="post">
+              {% csrf_token %}
+              <div class="module-name">
+                {{ module_form.module_name }}
+              </div>
+              <div style="padding-top: 12px;">
+                <button type="submit" class="btn btn-dark modal-login-btn" id="module-confirm">Confirm</button>               
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $('.modal').on('hide.bs.modal', function() {
+          var video = $(this).find('video')[0];
+          if (video) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      });
+    </script>
+    
+   
+
+
+    </main>
+  </body>
+</html>

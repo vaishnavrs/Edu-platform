@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style="height: 370px;">
+    <div class="row" style="background-color: #2d2f31; padding: 0%; height: 80%;">
+        <div class="col-md-6">
+            <div>
+                <p id="detail-cat" style="color: #c0c4fc;">{{ course.category}}</p>
+            </div>
+            <div>
+                <h3 id="detail-head"style="color: white;">{{ course.course_name }}</h3>
+                <p id="detail-para" style="color: white;">
+                    Created by  <span style="color: #c0c4fc; text-transform: capitalize;">{{ course.faculty.name }}</span>
+                </p>
+                <p id="detail-para1" style="color: white;">
+                    <span class="material-symbols-outlined update-icon">
+                        update
+                    </span>
+                     Last Updated 8/2024
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" id="detail-card"  style="width: 18rem;">
+                <img class="card-img-top" src="{{ course.course_image.url }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"> 
+                        <b>&#x20b9; {{ course.course_fee }}</b>
+                  </p>
+                  <form method="POST" action="{% url 'add_to_cart' course.id %}">
+                    {% csrf_token %}
+                        <button type="submit" class="btn btn-dark" id="detail-card-btn" style="width: 100%;">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 170px;">
+        <div class="col-md-12">
+            <div class="card desc-card">
+                <h5 class="card-title" style="padding-top: 20px; padding-left: 20px;">What will you learn</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for line,des in description.items %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center"> 
+                                        <i class="fa-solid fa-check" style="color: #808185; margin-right: 8px;"></i> 
+                                        <p class="card-text mb-0">{{ des }}.</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div> 
+    <div class="row" style="margin-top: 100px;">
+        <div class="row" >
+            <h4 id="content-head">Course Content</h4>
+        </div>
+        <div class="row" style="margin-bottom: 80px;">
+            {% for mod in module %}
+                <div class="card" id="content-card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-link dropdown-toggle" id="dropdownMenuButton{{ forloop.counter }}" data-toggle="collapse" data-target="#collapseCardBody{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseCardBody {{ forloop.counter }}">
+                                    {{ mod.module_name }}
+                                </button>
+                            </div>
+                        </h2>
+                    </div>
+                    <div id="collapseCardBody{{ forloop.counter }}" class="collapse">
+                        <div class="card-body">
+                            {% if video %}
+                                {% for v in video %}
+                                    {% if v.course_module.id == mod.id %}
+                                        <p class="dropdown-item">
+                                            <i class="fa-solid fa-tv fa-2xs" style="color: #000000; padding-right: 10px;"></i>{{ v.title}}
+                                        </p>
+                                    {% endif %}
+                                {% endfor%}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+</div>
+
+
+{% endblock %}
